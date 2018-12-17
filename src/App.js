@@ -1,26 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-class App extends Component {
+class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: 'Please enter some text.',
+      summary: ''
+    };
+
+    this.updateSummary = this.updateSummary.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  updateSummary() {
+    alert('changed value: ');
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+    event.preventDefault();
+  }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-
-          </a>
+        <header>
+         <h1>Skimmer</h1>
         </header>
+
+          <form onSubmit={this.setState({summary: this.state.value})}>
+          <textarea value={this.state.value} onChange={this.handleChange} />
+          <input type="submit" value="Submit" />
+          </form>
+
+          <p>{this.state.summary}</p>
+
       </div>
     );
   }
