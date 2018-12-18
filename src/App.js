@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Summary from './Summary.js';
 
 class App extends React.Component {
 
@@ -7,16 +8,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      value: 'Please enter some text.',
-      summary: ''
+      value: '',
     };
-
-    this.updateSummary = this.updateSummary.bind(this);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  updateSummary() {
-    alert('changed value: ');
   }
 
   handleChange(event) {
@@ -27,17 +21,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header>
-         <h1>Skimmer</h1>
-        </header>
-
-          <form onSubmit={this.setState({summary: this.state.value})}>
-          <textarea value={this.state.value} onChange={this.handleChange} />
-          <input type="submit" value="Submit" />
-          </form>
-
-          <p>{this.state.summary}</p>
-
+         <h1 className="title">Skimmer</h1>
+          <div className="column" >
+            <textarea cols={70} rows={40} value={this.state.value} onChange={this.handleChange} placeholder='Please enter text'/>
+          </div>
+          <Summary className="column" value={this.state.value} />
       </div>
     );
   }
